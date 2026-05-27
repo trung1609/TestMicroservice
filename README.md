@@ -3,6 +3,7 @@
 ## Sơ đồ Kiến trúc Hệ thống
 
 ```mermaid
+flowchart TB
     Client(["Client / Postman"]): client
 
     ["Cơ sở hạ tầng (Infrastructure)"]
