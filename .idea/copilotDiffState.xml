@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CopilotDiffPersistence">
+    <option name="pendingDiffs">
+      <map>
+        <entry key="/BadRequestException (snapshot).java">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="/BadRequestException (snapshot).java" />
+              <option name="originalContent" value="package com.trung.orderservice.exception;&#10;&#10;public class BadRequestException extends RuntimeException {&#10;    public BadRequestException(String message) {&#10;        super(message);&#10;    }&#10;}&#10;&#10;" />
+              <option name="updatedContent" value="package com.trung.orderservice.exception;&#10;&#10;public class BadRequestException extends Exception {&#10;    public BadRequestException(String message) {&#10;        super(message);&#10;    }&#10;}&#10;&#10;" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
+        <entry key="/GlobalExceptionHandler (snapshot).java">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="/GlobalExceptionHandler (snapshot).java" />
+              <option name="originalContent" value="package com.trung.inventoryservice.exception;&#10;&#10;import org.springframework.http.HttpStatus;&#10;import org.springframework.http.ResponseEntity;&#10;import org.springframework.web.bind.annotation.ExceptionHandler;&#10;import org.springframework.web.bind.annotation.RestControllerAdvice;&#10;&#10;import java.time.LocalDateTime;&#10;import java.util.LinkedHashMap;&#10;import java.util.Map;&#10;&#10;@RestControllerAdvice&#10;public class GlobalExceptionHandler {&#10;&#10;    @ExceptionHandler(RuntimeException.class)&#10;    public ResponseEntity&lt;Map&lt;String, Object&gt;&gt; handleRuntimeException(RuntimeException ex) {&#10;        Map&lt;String, Object&gt; errorDetails = new LinkedHashMap&lt;&gt;();&#10;        errorDetails.put(&quot;timestamp&quot;, LocalDateTime.now());&#10;        errorDetails.put(&quot;status&quot;, HttpStatus.BAD_REQUEST.value());&#10;        errorDetails.put(&quot;error&quot;, HttpStatus.BAD_REQUEST.getReasonPhrase());&#10;        errorDetails.put(&quot;message&quot;, ex.getMessage());&#10;&#10;        return new ResponseEntity&lt;&gt;(errorDetails, HttpStatus.BAD_REQUEST);&#10;    }&#10;&#10;    @ExceptionHandler(Exception.class)&#10;    public ResponseEntity&lt;Map&lt;String, Object&gt;&gt; handleGlobalException(Exception ex) {&#10;        Map&lt;String, Object&gt; errorDetails = new LinkedHashMap&lt;&gt;();&#10;        errorDetails.put(&quot;timestamp&quot;, LocalDateTime.now());&#10;        errorDetails.put(&quot;status&quot;, HttpStatus.INTERNAL_SERVER_ERROR.value());&#10;        errorDetails.put(&quot;error&quot;, HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase());&#10;        errorDetails.put(&quot;message&quot;, ex.getMessage());&#10;&#10;        return new ResponseEntity&lt;&gt;(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);&#10;    }&#10;}&#10;&#10;" />
+              <option name="updatedContent" value="package com.trung.inventoryservice.exception;&#10;&#10;import org.springframework.http.HttpStatus;&#10;import org.springframework.http.ResponseEntity;&#10;import org.springframework.web.bind.annotation.ExceptionHandler;&#10;import org.springframework.web.bind.annotation.RestControllerAdvice;&#10;&#10;import java.time.LocalDateTime;&#10;import java.util.LinkedHashMap;&#10;import java.util.Map;&#10;&#10;@RestControllerAdvice&#10;public class GlobalExceptionHandler {&#10;&#10;    @ExceptionHandler(ResourceNotFoundException.class)&#10;    public ResponseEntity&lt;Map&lt;String, Object&gt;&gt; handleResourceNotFoundException(ResourceNotFoundException ex) {&#10;        Map&lt;String, Object&gt; errorDetails = new LinkedHashMap&lt;&gt;();&#10;        errorDetails.put(&quot;timestamp&quot;, LocalDateTime.now());&#10;        errorDetails.put(&quot;status&quot;, HttpStatus.NOT_FOUND.value());&#10;        errorDetails.put(&quot;error&quot;, HttpStatus.NOT_FOUND.getReasonPhrase());&#10;        errorDetails.put(&quot;message&quot;, ex.getMessage());&#10;&#10;        return new ResponseEntity&lt;&gt;(errorDetails, HttpStatus.NOT_FOUND);&#10;    }&#10;&#10;    @ExceptionHandler(BadRequestException.class)&#10;    public ResponseEntity&lt;Map&lt;String, Object&gt;&gt; handleBadRequestException(BadRequestException ex) {&#10;        Map&lt;String, Object&gt; errorDetails = new LinkedHashMap&lt;&gt;();&#10;        errorDetails.put(&quot;timestamp&quot;, LocalDateTime.now());&#10;        errorDetails.put(&quot;status&quot;, HttpStatus.BAD_REQUEST.value());&#10;        errorDetails.put(&quot;error&quot;, HttpStatus.BAD_REQUEST.getReasonPhrase());&#10;        errorDetails.put(&quot;message&quot;, ex.getMessage());&#10;&#10;        return new ResponseEntity&lt;&gt;(errorDetails, HttpStatus.BAD_REQUEST);&#10;    }&#10;&#10;    @ExceptionHandler(Exception.class)&#10;    public ResponseEntity&lt;Map&lt;String, Object&gt;&gt; handleGlobalException(Exception ex) {&#10;        Map&lt;String, Object&gt; errorDetails = new LinkedHashMap&lt;&gt;();&#10;        errorDetails.put(&quot;timestamp&quot;, LocalDateTime.now());&#10;        errorDetails.put(&quot;status&quot;, HttpStatus.INTERNAL_SERVER_ERROR.value());&#10;        errorDetails.put(&quot;error&quot;, HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase());&#10;        errorDetails.put(&quot;message&quot;, ex.getMessage());&#10;&#10;        return new ResponseEntity&lt;&gt;(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);&#10;    }&#10;}&#10;&#10;" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
+        <entry key="/ResourceNotFoundException (snapshot).java">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="/ResourceNotFoundException (snapshot).java" />
+              <option name="originalContent" value="package com.trung.orderservice.exception;&#10;&#10;public class ResourceNotFoundException extends RuntimeException {&#10;    public ResourceNotFoundException(String message) {&#10;        super(message);&#10;    }&#10;}&#10;&#10;" />
+              <option name="updatedContent" value="package com.trung.orderservice.exception;&#10;&#10;public class ResourceNotFoundException extends Exception {&#10;    public ResourceNotFoundException(String message) {&#10;        super(message);&#10;    }&#10;}&#10;&#10;" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

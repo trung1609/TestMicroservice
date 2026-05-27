@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface ProductService {
     List<ProductResponse> getAllProducts();
-    ProductResponse getProductById(Long id);
-    String reduceProductQuantity(OrderPlaceEvent event);
+    ProductResponse getProductById(Long id) throws Exception;
+    String reduceProductQuantity(OrderPlaceEvent event) throws Exception;
 }
