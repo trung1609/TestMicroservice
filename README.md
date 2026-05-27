@@ -4,37 +4,40 @@
 
 ```mermaid
 flowchart TB
-    Client(["Client / Postman"]): client
+    Client(["Client / Postman"]):::client
 
-    ["Cơ sở hạ tầng (Infrastructure)"]
-        Gateway["API Gateway (Port: 8686)"]
-        Eureka(("Eureka Server (Port: 8761)"))
+    subgraph Infra ["Cơ sở hạ tầng (Infrastructure)"]
+        Gateway["API Gateway<br>(Port: 8686)"]:::infra
+        Eureka(("Eureka Server<br>(Port: 8761)")):::infra
+    end
 
-    Services ["Microservices"]
-        Order["Order Service (Port: 8081)"]: service
-        Inventory["Inventory Service (Port: 8082)"]: service
+    subgraph Services ["Microservices"]
+        Order["Order Service<br>(Port: 8081)"]:::service
+        Inventory["Inventory Service<br>(Port: 8082)"]:::service
+    end
 
-    DataLayer ["Lưu trữ & Messaging"]
-        OrderDB[("Order DB (PostgreSQL)")]: db
-        Kafka{"Apache Kafka (Port: 9092)"}: broker
-        InventoryDB[("Inventory DB (PostgreSQL)")]: db
+    subgraph DataLayer ["Lưu trữ & Messaging"]
+        OrderDB[("Order DB<br>(PostgreSQL)")]:::db
+        Kafka{"⚡ Apache Kafka<br>(Port: 9092)"}:::broker
+        InvDB[("Inventory DB<br>(PostgreSQL)")]:::db
+    end
 
-    Luồng API từ ngoài vào
-    Client -- "POST /api/v1/orders GET api/v1/products" --> Gateway
+    %% Luồng API từ ngoài vào
+    Client -- "POST /api/v1/orders<br>GET /api/v1/products" --> Gateway
     Gateway -- "lb://ORDER-SERVICE" --> Order
     Gateway -- "lb://INVENTORY-SERVICE" --> Inventory
 
-    Luồng Eureka
-    Gateway -- "Đăng ký/Khám phá" -- Eureka
-    Order -- "Đăng ký" -- Eureka
-    Inventory -- "Đăng ký" -- Eureka
+    %% Luồng Eureka (Nét đứt để giảm nhiễu)
+    Gateway -. "Đăng ký/Khám phá" .- Eureka
+    Order -. "Đăng ký" .- Eureka
+    Inventory -. "Đăng ký" .- Eureka
 
-    Luồng Nghiệp vụ
+    %% Luồng Nghiệp vụ (Business Logic)
     Order -- "1. Check Stock (Feign)" --> Inventory
     Order -- "2. Lưu Đơn hàng" --> OrderDB
-    Order -- "3. Pub: order-place-topic" --> Kafka
-    Kafka -- "4. Sub: order-place-topic" --> Inventory
-    Inventory -- "5. Trừ & Cập nhật Stock" --> InventoryDB
+    Order -- "3. Pub: order-place" --> Kafka
+    Kafka -- "4. Sub: order-place" --> Inventory
+    Inventory -- "5. Trừ & Cập nhật Stock" --> InvDB
 ```
 
 ---
