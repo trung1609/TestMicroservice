@@ -18,7 +18,7 @@ flowchart TB
 
     subgraph DataLayer ["Lưu trữ & Messaging"]
         OrderDB[("Order DB<br>(PostgreSQL)")]:::db
-        Kafka{"⚡ Apache Kafka<br>(Port: 9092)"}:::broker
+        Kafka{"Apache Kafka<br>(Port: 9092)"}:::broker
         InvDB[("Inventory DB<br>(PostgreSQL)")]:::db
     end
 
